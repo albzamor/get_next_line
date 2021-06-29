@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/06/29 14:41:47 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/06/29 19:58:32 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int	get_next_line(int fd, char **line)
 			*line = *ft_split(static_line[fd], '\n');
 			return (1);
 		}
-		if (!static_line[fd])
-			static_line[fd] = ft_strdup(buf);
-		else
-			ft_strjoin(static_line[fd], buf);
+		//if (!static_line[fd])
+			//static_line[fd] = ft_strdup(buf);
+		//else
+			//ft_strjoin(static_line[fd], buf);
 	}
 	return (1);
 }
@@ -79,7 +79,9 @@ int	main(int argc, char **argv)
 		return (-1);
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &line);
-	printf("%s", line);
+	printf("primera linea: %s", line);
+	printf("\n");
 	get_next_line(fd, &line);
-	printf("%s", line);
+	printf("segunda linea: %s", line);
+	printf("\n");
 }
