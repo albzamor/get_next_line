@@ -1,1 +1,7 @@
 .DS_*
+a.out
+debugout
+txt
+/*.dSYM
+.vscode
+.code-workspace

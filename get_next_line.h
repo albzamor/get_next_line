@@ -6,71 +6,27 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:34:07 by albzamor          #+#    #+#             */
-/*   Updated: 2021/06/25 12:34:07 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/06/29 13:52:41 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <fcntl.h>
 
+# define BUFFER_SIZE 1024
 
-
-
-
-
-
+char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_calloc(size_t count, size_t size);
+char	**ft_split(char const *s, char c);
+char	*ft_strchr(const char *s, int c);
+void	ft_bzero(void *s, size_t n);
+size_t	ft_strlen(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int		get_next_line(int fd, char **line)
-{
-	char		*buff;
-	static char	*x[4096];
-	ssize_t		nbytes;
-	char		*tmp;
-
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0 ||
-		(!(buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1)))))
-		return (-1);
-	while ((nbytes = read(fd, buff, BUFFER_SIZE)) > 0)
-	{
-		buff[nbytes] = '\0';
-		if (!x[fd])
-			x[fd] = ft_strdup(buff);
-		else
-		{
-			tmp = ft_strjoin(x[fd], buff);
-			free(x[fd]);
-			x[fd] = tmp;
-		}
-		if (ft_strchr(buff, '\n'))
-			break ;
-	}
-	free(buff);
-	buff = NULL;
-	return (ft_aux(nbytes, &x[fd], &*line));
-}
