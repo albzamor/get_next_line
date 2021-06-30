@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/06/29 19:58:32 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/06/30 19:29:44 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,30 @@ int	get_next_line(int fd, char **line)
 {
 	char		buf[BUFFER_SIZE + 1];
 	static char	*static_line[4096];
+	int			len_static;
 
+	len_static = 0;
 	if (fd < 0 || line == NULL)
 		return (-1);
-	while ((read(fd, buf, BUFFER_SIZE)) > 0)
+	while ((read(fd, buf, 20)) > 0)
 	{
 		if (ft_strchr(buf, '\n'))
 		{
-			static_line[fd] = malloc (ft_strlen(buf));
+			static_line[fd] = malloc (BUFFER_SIZE + len_static);
 			static_line[fd] = ft_strjoin(static_line[fd], buf);
-			*line = *ft_split(static_line[fd], '\n');
+			*line = *ft_split((static_line[fd]), '\n');
+			//*line = ft_substr(static_line[fd], len_static, 40);
+			len_static = ft_strlen(static_line[fd]);
 			return (1);
 		}
-		//if (!static_line[fd])
-			//static_line[fd] = ft_strdup(buf);
-		//else
-			//ft_strjoin(static_line[fd], buf);
+		else
+		{
+			//if (!static_line[fd])
+				//ft_strdup(buf);
+			static_line[fd] = malloc (BUFFER_SIZE + len_static);
+			static_line[fd] = ft_strjoin(static_line[fd], buf);
+			len_static = ft_strlen(static_line[fd]);
+		}
 	}
 	return (1);
 }
@@ -83,5 +91,8 @@ int	main(int argc, char **argv)
 	printf("\n");
 	get_next_line(fd, &line);
 	printf("segunda linea: %s", line);
+	printf("\n");
+	get_next_line(fd, &line);
+	printf("tercera linea: %s", line);
 	printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 13:56:14 by albzamor          #+#    #+#             */
-/*   Updated: 2021/06/29 14:22:26 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/06/30 19:24:23 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,4 +192,5 @@ char	**ft_split(char const *s, char c)
 	}
 	pp[i] = NULL;
 	return (pp);
+
 }
