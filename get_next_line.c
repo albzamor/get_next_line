@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/01 18:48:19 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/01 19:02:51 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int	main(int argc, char **argv)
 		return (-1);
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &line);
-	printf("primera linea: %s", line);
+	printf("\033[0;31mprimera linea: 🚀 \033[0;37m%s", line);
 	printf("\n");
 	get_next_line(fd, &line);
-	printf("segunda linea: %s", line);
+	printf("\033[0;31msegunda linea: \033[0;37m%s", line);
 	printf("\n");
 	get_next_line(fd, &line);
-	printf("tercera linea: %s", line);
+	printf("\033[0;31mtercera linea: \033[0;37m%s", line);
 	printf("\n");
 	//system("leaks a.out");
 }
