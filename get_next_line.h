@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:34:07 by albzamor          #+#    #+#             */
-/*   Updated: 2021/06/30 19:22:57 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/01 17:57:27 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 30
 
 char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_calloc(size_t count, size_t size);

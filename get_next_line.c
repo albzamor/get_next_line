@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/06/30 19:29:44 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/01 18:24:08 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,25 @@ char	*ft_strdup(const char *s1)
 
 int	get_next_line(int fd, char **line)
 {
-	char		buf[BUFFER_SIZE + 1];
+	char		buf[BUFFER_SIZE];
 	static char	*static_line[4096];
 	int			len_static;
 
 	len_static = 0;
 	if (fd < 0 || line == NULL)
 		return (-1);
-	while ((read(fd, buf, 20)) > 0)
+	static_line[fd] = malloc(0);
+	while ((read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		if (ft_strchr(buf, '\n'))
 		{
-			static_line[fd] = malloc (BUFFER_SIZE + len_static);
 			static_line[fd] = ft_strjoin(static_line[fd], buf);
 			*line = *ft_split((static_line[fd]), '\n');
-			//*line = ft_substr(static_line[fd], len_static, 40);
 			len_static = ft_strlen(static_line[fd]);
 			return (1);
 		}
 		else
 		{
-			//if (!static_line[fd])
-				//ft_strdup(buf);
 			static_line[fd] = malloc (BUFFER_SIZE + len_static);
 			static_line[fd] = ft_strjoin(static_line[fd], buf);
 			len_static = ft_strlen(static_line[fd]);
