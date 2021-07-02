@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 13:56:14 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/02 13:01:58 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:46:04 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,26 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+char	*ft_strdup(const char *s1)
+{
+	size_t	i;
+	char	*copy;
 
+	i = 0;
+	while (s1[i] != '\0')
+		i++;
+	copy = ft_calloc(i + 1, sizeof(char));
+	if (copy == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		copy[i] = s1[i];
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy);
+}
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	unsigned int	i;

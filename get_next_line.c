@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/02 15:55:50 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/02 17:14:37 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,17 @@ int	ft_strchr2(const char *s, int c)
 
 int	get_next_line(int fd, char **line)
 {
-	char		buf[BUFFER_SIZE];
+	char		buf[BUFFER_SIZE + 1];
 	static char	*static_line[4096];
 	char		*temp;
 
 	if (fd < 0 || line == NULL)
 		return (-1);
 	if (static_line[fd] == NULL)
-		static_line[fd] = malloc(0);
-	while ((read(fd, buf, BUFFER_SIZE)) > 0)
+		static_line[fd] = ft_strdup("");
+	while (read(fd, buf, BUFFER_SIZE) > 0 || !*static_line[fd])
 	{
+		buf[BUFFER_SIZE] = '\0';
 		if (ft_strchr(buf, '\n'))
 		{
 			static_line[fd] = ft_strjoin(static_line[fd], buf);
@@ -66,7 +67,7 @@ int	get_next_line(int fd, char **line)
 			free(temp);
 		}
 	}
-	return (1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -77,7 +78,12 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (-1);
 	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, &line);
+	while (get_next_line(fd, &line) != 0)
+		{
+			printf("\033[0;31mprimera linea: 🚀\033[0;37m%s\n", line);
+		}
+
+	/* get_next_line(fd, &line);
 	printf("\033[0;31mprimera linea: 🚀\033[0;37m%s", line);
 	printf("\n");
 	get_next_line(fd, &line);
@@ -85,6 +91,6 @@ int	main(int argc, char **argv)
 	printf("\n");
 	get_next_line(fd, &line);
 	printf("\033[0;31mtercera linea: 🚀\033[0;37m%s", line);
-	printf("\n");
+	printf("\n"); */
 	//system("leaks a.out");
 }
