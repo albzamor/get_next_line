@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/02 13:00:40 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:55:50 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ int	get_next_line(int fd, char **line)
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	static_line[fd] = malloc(0);
+	if (static_line[fd] == NULL)
+		static_line[fd] = malloc(0);
 	while ((read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		if (ft_strchr(buf, '\n'))
 		{
 			static_line[fd] = ft_strjoin(static_line[fd], buf);
 			*line = ft_substr(static_line[fd], 0, ft_strchr2(static_line[fd], '\n'));
-			static_line[fd] = ft_substr(static_line[fd], ft_strchr2(static_line[fd], '\n'), ft_strlen(static_line[fd]));
+			static_line[fd] = ft_substr(static_line[fd], ft_strchr2(static_line[fd], '\n') + 1, ft_strlen(static_line[fd]));
 			return (1);
 		}
 		else
@@ -77,7 +78,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &line);
-	printf("\033[0;31mprimera linea: 🚀 \033[0;37m%s", line);
+	printf("\033[0;31mprimera linea: 🚀\033[0;37m%s", line);
 	printf("\n");
 	get_next_line(fd, &line);
 	printf("\033[0;31msegunda linea: 🚀\033[0;37m%s", line);
