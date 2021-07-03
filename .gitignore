@@ -6,3 +6,5 @@ txt
 .vscode
 .code-workspace
 ni_*
+gnlTester/
+debugout.dSYM/
