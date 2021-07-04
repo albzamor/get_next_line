@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/04 13:13:29 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/04 17:21:02 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	get_next_line(int fd, char **line)
 	char		buf[BUFFER_SIZE + 1];
 	static char	*sl[4096];
 	char		*temp;
+	long long 	len;
 
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
@@ -68,22 +69,28 @@ int	get_next_line(int fd, char **line)
 	}
 	while (!(ft_strchr(sl[fd], '\n')))
 	{
-		if(read(fd, buf, BUFFER_SIZE) > 0)
+		if((len = read(fd, buf, BUFFER_SIZE)) > 0) //OJO
 		{
+			buf[len] = '\0';
 			temp = sl[fd];
 			sl[fd] = ft_strjoin(sl[fd], buf);
 			free(temp);
 		}
-		else if (read(fd, buf, BUFFER_SIZE) == 0)
+		else if (len == 0)
 		{
-			//if (*sl[fd])//(sl[fd][0] != '\0')
-				//*line = sl[fd];
+			temp = sl[fd];
+			*line = ft_substr(sl[fd], 0, ft_strlen(sl[fd]));
+			free(temp);
+			//if (*(sl[fd]))
+				//free(sl[fd]);
 			return (0);
 		}
-		else if (read(fd, buf, BUFFER_SIZE) == -1)
+		else if (len == -1)
 			return (-1);
 	}
+	temp = sl[fd];
 	*line = ft_substr(sl[fd], 0, ft_strchr2(sl[fd], '\n'));
+	free(temp);
 	sl[fd] = ft_substr(sl[fd], ft_strchr2(sl[fd], '\n') + 1, ft_strlen(sl[fd]));
 	return (1);
 }
@@ -91,7 +98,6 @@ int	get_next_line(int fd, char **line)
 /*
 
 #include "get_next_line.h"
-
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s != '\0')
