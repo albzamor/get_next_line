@@ -23,5 +23,14 @@ int	main(int argc, char **argv)
 	get_next_line(fd, &line);
 	printf("\033[0;31mcuarta  linea: 🚀\033[0;37m%s", line);
 	printf("\n");
+	get_next_line(fd, &line);
+	printf("\033[0;31mquinta  linea: 🚀\033[0;37m%s", line);
+	printf("\n");
+	get_next_line(fd, &line);
+	printf("\033[0;31msexta   linea: 🚀\033[0;37m%s", line);
+	printf("\n");
+	get_next_line(fd, &line);
+	printf("\033[0;31mseptia  linea: 🚀\033[0;37m%s", line);
+	printf("\n");
 	//system("leaks a.out");
 }

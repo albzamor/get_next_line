@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/03 18:44:19 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/04 13:13:29 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,47 @@ int	ft_strchr2(const char *s, int c)
 	return (0);
 }
 
+int	free_del(char **del, int ret)
+{
+	if (*del)
+	{
+		free(*del);
+		*del = 0;
+	}
+	return (ret);
+
+}
+
 int	get_next_line(int fd, char **line)
 {
 	char		buf[BUFFER_SIZE + 1];
 	static char	*sl[4096];
 	char		*temp;
 
-	buf[BUFFER_SIZE] = '\0';
-	if (fd < 0 || line == NULL)
+
+	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
-	read(fd, buf, BUFFER_SIZE);
+	buf[BUFFER_SIZE] = '\0';
 	if (sl[fd] == NULL)
+	{
+		read(fd, buf, BUFFER_SIZE);
 		sl[fd] = ft_strdup(buf);
+	}
 	while (!(ft_strchr(sl[fd], '\n')))
 	{
-		if (read(fd, buf, BUFFER_SIZE) > 0)
+		if(read(fd, buf, BUFFER_SIZE) > 0)
 		{
 			temp = sl[fd];
 			sl[fd] = ft_strjoin(sl[fd], buf);
 			free(temp);
 		}
-		if (read(fd, buf, BUFFER_SIZE) == 0)
+		else if (read(fd, buf, BUFFER_SIZE) == 0)
 		{
-			*line = sl[fd];
-			free(sl[fd]);
+			//if (*sl[fd])//(sl[fd][0] != '\0')
+				//*line = sl[fd];
 			return (0);
 		}
-		if (read(fd, buf, BUFFER_SIZE) == -1)
+		else if (read(fd, buf, BUFFER_SIZE) == -1)
 			return (-1);
 	}
 	*line = ft_substr(sl[fd], 0, ft_strchr2(sl[fd], '\n'));
