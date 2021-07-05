@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/04 17:21:02 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:37:26 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int	ft_strchr2(const char *s, int c)
 	return (0);
 }
 
-int	free_del(char **del, int ret)
+int	free_del(char **del, int re_turn)
 {
 	if (*del)
 	{
 		free(*del);
 		*del = 0;
 	}
-	return (ret);
+	return (re_turn);
 
 }
 
@@ -59,8 +59,14 @@ int	get_next_line(int fd, char **line)
 	long long 	len;
 
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
+	if (fd < 0 || !line || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1 )
+	{
+		//if (sl[fd])
+			//free_del(&sl[fd], -1);
+
 		return (-1);
+	}
+	if (fd)
 	buf[BUFFER_SIZE] = '\0';
 	if (sl[fd] == NULL)
 	{
@@ -78,9 +84,9 @@ int	get_next_line(int fd, char **line)
 		}
 		else if (len == 0)
 		{
-			temp = sl[fd];
+			//temp = sl[fd];
 			*line = ft_substr(sl[fd], 0, ft_strlen(sl[fd]));
-			free(temp);
+			//free(temp);
 			//if (*(sl[fd]))
 				//free(sl[fd]);
 			return (0);
@@ -90,8 +96,8 @@ int	get_next_line(int fd, char **line)
 	}
 	temp = sl[fd];
 	*line = ft_substr(sl[fd], 0, ft_strchr2(sl[fd], '\n'));
-	free(temp);
 	sl[fd] = ft_substr(sl[fd], ft_strchr2(sl[fd], '\n') + 1, ft_strlen(sl[fd]));
+	free(temp);
 	return (1);
 }
 
