@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:35:02 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/05 19:35:12 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/06 18:46:53 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	}
 	if (fd)
-		buf[BUFFER_SIZE] = '\0';
+		buf[0] = '\0';
 	if (sl[fd] == NULL)
 	{
 		read(fd, buf, BUFFER_SIZE);
