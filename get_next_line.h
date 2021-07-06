@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:34:07 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/06 18:15:56 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/06 19:22:30 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 30
+#  define BUFFER_SIZE 42
 # endif
 
 char	*ft_strjoin(char const *s1, char const *s2);
