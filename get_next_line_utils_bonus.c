@@ -6,7 +6,7 @@
 /*   By: albzamor <albzamor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 13:56:14 by albzamor          #+#    #+#             */
-/*   Updated: 2021/07/06 19:47:40 by albzamor         ###   ########.fr       */
+/*   Updated: 2021/07/07 14:08:39 by albzamor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*buffer;
+	unsigned char	*buffer;
+	size_t			i;
 
 	buffer = malloc(count * size);
 	if (buffer == NULL)
 		return (buffer);
-	ft_bzero(buffer, size * count);
-	return (buffer);
+	i = 0;
+	while (i < size * count)
+	{
+		buffer[i] = 0;
+		i++;
+	}
+	return ((void *)buffer);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -47,20 +53,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		scopy[i++] = s2[j++];
 	scopy[i] = '\0';
 	return (scopy);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	size_t			i;
-	unsigned char	*ptr;
-
-	i = 0;
-	ptr = s;
-	while (i < n)
-	{
-		ptr[i] = 0;
-		i++;
-	}
 }
 
 char	*ft_strdup(const char *s1)
